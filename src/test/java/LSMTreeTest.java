@@ -23,11 +23,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class LSMTreeTest {
-  private LSMTree<Integer, Integer> tree = new LSMTree<>(6, 3);
+  private final LSMTree<Integer, Integer> tree = new LSMTree<>(6, 2, 3);
 
   @Before
   public void initTree() {
-    for (int i = 0; i < 189; i++) {
+    for (int i = 0; i < 100; i++) {
       tree.insert(i, i * 2);
     }
   }
@@ -48,7 +48,7 @@ public class LSMTreeTest {
   }
 
   @Test
-  public void addAndDelete() {
+  public void deleteAndADD() {
     for (int i = 0; i < 50; i++) {
       tree.remove(i);
       Assert.assertNull(tree.get(i));
@@ -57,5 +57,22 @@ public class LSMTreeTest {
       tree.insert(i + 100, (i + 100) * 2);
       Assert.assertEquals(0, tree.get(i + 100) - 2 * (i + 100));
     }
+  }
+
+  @Test
+  public void removeAndInsert() {
+    tree.remove(0);
+    tree.insert(0, 0);
+    Assert.assertEquals(0, (int) tree.get(0));
+  }
+
+  @Test
+  public void multiPos() {
+    tree.remove(0);
+    for (int i = 0; i < 50; i++) {
+      tree.insert(i + 100, (i + 100) * 2);
+      Assert.assertEquals(0, tree.get(i + 100) - 2 * (i + 100));
+    }
+    Assert.assertNull(tree.get(0));
   }
 }
