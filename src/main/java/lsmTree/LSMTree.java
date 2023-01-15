@@ -188,13 +188,12 @@ public class LSMTree<K extends Comparable<K>, V> {
   }
 
   public void print() {
-    System.out.printf("LSM Tree: MaxLevel=%d, Order=%d\n", nodes.size(), order);
+    System.out.printf("LSM Tree: MaxLevel=%d, K=%d, Order=%d\n", nodes.size(), k, order);
     for (int level = 0; level < nodes.size(); level++) {
       LSMNode<K, V> tree = nodes.get(level);
       System.out.printf(
           "Level-%d Tree: MaxSize=%d, Size=%d\n", level, tree.getMaxSize(), tree.getSize());
       tree.print();
-      System.out.println();
     }
   }
 }
