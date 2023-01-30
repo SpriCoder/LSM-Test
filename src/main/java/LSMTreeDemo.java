@@ -27,7 +27,7 @@ public class LSMTreeDemo {
     System.out.println("--------------------------------");
     System.out.println("初始化树，并插入到5:");
     System.out.println("--------------------------------");
-    for (int i = 0; i < 5; i++) {
+    for (int i = 1; i <= 5; i++) {
       tree.insert(i, i * 2);
     }
     tree.print();
